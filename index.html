@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta charset="UTF-8"><title>首頁</title></head>
+<body>
+  <h1>開始遊戲</h1>
+  <input id="name" placeholder="輸入名字">
+  <button onclick="start()">開始</button>
+  <a class="btn" href="https://tw.news.yahoo.com/" target="_blank">
+  Yahoo! 新聞
+  </a>
+
+  <script>
+    function start(){
+      const name = document.getElementById("name").value.trim();
+      if(!name){ alert("請輸入名字"); return; }
+      localStorage.setItem("username", name);
+      localStorage.setItem("score", "0");
+      location.href = "game.html";
+    }
+  </script>
+</body>
+</html>

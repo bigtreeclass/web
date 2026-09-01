@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta charset="UTF-8"><title>遊戲頁</title></head>
+<body>
+  <h1>按鈕小遊戲</h1>
+  <h2 id="hello"></h2>
+  <p>分數：<span id="score">0</span></p>
+
+  <button onclick="add()">點我+1</button>
+  <button onclick="finish()">結束並送出</button>
+
+  <script>
+    const name = localStorage.getItem("username") || "訪客";
+    let score = Number(localStorage.getItem("score") || "0");
+
+    document.getElementById("hello").textContent = `玩家：${name}`;
+    document.getElementById("score").textContent = score;
+
+    function add(){
+      score += 1;
+      localStorage.setItem("score", String(score));
+      document.getElementById("score").textContent = score;
+    }
+
+    function finish(){
+      // 讀舊排行榜
+      const raw = localStorage.getItem("board");
+      const board = raw ? JSON.parse(raw) : [];
+
+      // 加入這次成績
+      board.push({ name, score });
+
+      // 排序（高到低）
+      board.sort((a,b)=> b.score - a.score);
+
+      localStorage.setItem("board", JSON.stringify(board));
+      location.href = "rank.html";
+    }
+  </script>
+</body>
+</html>

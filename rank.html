@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta charset="UTF-8"><title>排行榜</title></head>
+<body>
+  <h1>排行榜</h1>
+  <ol id="list"></ol>
+
+  <button onclick="again()">再玩一次</button>
+  <button onclick="clearBoard()">清空排行榜</button>
+
+  <script>
+    const raw = localStorage.getItem("board");
+    const board = raw ? JSON.parse(raw) : [];
+
+    const ol = document.getElementById("list");
+    ol.innerHTML = board.map(x => `<li>${x.name}：${x.score}</li>`).join("");
+
+    function again(){
+      location.href = "index.html";
+    }
+
+    function clearBoard(){
+      localStorage.removeItem("board");
+      location.reload();
+    }
+  </script>
+</body>
+</html>
